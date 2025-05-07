@@ -11,7 +11,7 @@ const ChatMessage = ({ text, isUser, isError }: ChatMessageProps) => {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} animate-fadeIn`}>
       {isUser ? (
-        <div className="bg-gray-200 text-black p-4 rounded-full max-w-xs">{text}</div>
+        <div className="bg-gray-200 text-black p-4 rounded-2xl max-w-4xl break-words whitespace-pre-wrap">{text}</div>
       ) : (
         <div className="flex items-start gap-2">
           <div className="flex-shrink-0">
