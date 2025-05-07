@@ -27,7 +27,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("", {
+      const response = await axios.post("https://2469-112-76-111-22.ngrok-free.app/chat/", {
         question: userMessage,
       });
 

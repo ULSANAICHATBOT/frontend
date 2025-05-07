@@ -1,21 +1,19 @@
 const express = require("express");
 const path = require("path");
-const cors = require("cors"); // CORS 패키지 추가
+const cors = require("cors");
 const app = express();
-const port = 3000; // 원하는 포트 번호
+const port = 3000;
 
-// CORS 설정
 app.use(
   cors({
-    origin: "http://example.com", // 허용할 도메인
+    origin: "https://2469-112-76-111-22.ngrok-free.app/chat/",
   })
 );
 
-// 정적 파일 서빙
-app.use(express.static(path.join(__dirname, "dist"))); // Vite의 경우
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html")); // Vite의 경우
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 app.listen(port, () => {
