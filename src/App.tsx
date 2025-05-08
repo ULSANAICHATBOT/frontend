@@ -11,6 +11,8 @@ export interface Message {
   isError: boolean;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
@@ -22,33 +24,21 @@ function App() {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [
-      ...prev,
-      { text: userMessage, isUser: true, isError: false },
-    ]);
+    setMessages((prev) => [...prev, { text: userMessage, isUser: true, isError: false }]);
     setInput("");
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "https://2469-112-76-111-22.ngrok-free.app/chat/",
-        {
-          question: userMessage,
-        }
-      );
+      const response = await axios.post(API_URL, {
+        question: userMessage,
+      });
 
       const aiResponse = response.data.response.response;
-      setMessages((prev) => [
-        ...prev,
-        { text: aiResponse, isUser: false, isError: false },
-      ]);
+      setMessages((prev) => [...prev, { text: aiResponse, isUser: false, isError: false }]);
     } catch (error) {
       console.error("AI의 답변을 받아오는데 실패했습니다:", error);
       const errorMessage = "죄송합니다. 서버와의 통신에 문제가 발생했습니다.";
-      setMessages((prev) => [
-        ...prev,
-        { text: errorMessage, isUser: false, isError: true },
-      ]);
+      setMessages((prev) => [...prev, { text: errorMessage, isUser: false, isError: true }]);
     } finally {
       setIsLoading(false);
     }
